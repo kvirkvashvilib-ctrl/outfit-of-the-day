@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Aurelia Atelier — considered occasionwear and private styling." />
+  <title>Aurelia Atelier | Private Wardrobe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { ink: '#171614', champagne: '#c8a978', linen: '#f5f1ea', smoke: '#77726b' },
+          fontFamily: { display: ['Cormorant Garamond', 'serif'], sans: ['DM Sans', 'sans-serif'] }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-linen text-ink font-sans antialiased">
+  <header class="site-header" id="top">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10" aria-label="Main navigation">
+      <a href="#top" class="brand" aria-label="Aurelia Atelier home">Aurelia<span>®</span></a>
+      <div class="hidden items-center gap-9 text-[11px] font-semibold uppercase tracking-[0.22em] md:flex">
+        <a class="nav-link" href="#collection">Collection</a>
+        <a class="nav-link" href="#atelier">The atelier</a>
+        <a class="nav-link" href="#booking">Book a fitting</a>
+      </div>
+      <a href="#booking" class="hidden border border-ink/25 px-5 py-3 text-[10px] font-bold uppercase tracking-[0.18em] transition hover:border-champagne hover:bg-ink hover:text-white md:block">Private appointment</a>
+      <button class="menu-button md:hidden" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+    </nav>
+    <div class="mobile-menu hidden px-6 pb-5 md:hidden">
+      <a href="#collection">Collection</a><a href="#atelier">The atelier</a><a href="#booking">Book a fitting</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero relative overflow-hidden" aria-labelledby="hero-title">
+      <div class="hero-image" role="img" aria-label="Model in an ivory evening gown"></div>
+      <div class="hero-shade"></div>
+      <div class="relative mx-auto flex min-h-[78vh] max-w-7xl items-end px-6 pb-12 pt-28 lg:min-h-[680px] lg:px-10 lg:pb-20">
+        <div class="max-w-xl text-white">
+          <p class="eyebrow mb-5 text-champagne">The private wardrobe / 2025</p>
+          <h1 id="hero-title" class="font-display text-6xl leading-[0.84] tracking-[-0.03em] sm:text-8xl">Quietly<br /><em>remarkable.</em></h1>
+          <p class="mt-7 max-w-sm text-sm leading-7 text-white/75">Intentional silhouettes, exceptional materials, and a slower approach to getting dressed.</p>
+          <a href="#collection" class="gold-button mt-8 inline-flex items-center gap-4">Explore the collection <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="absolute bottom-10 right-6 hidden max-w-[155px] border-l border-white/30 pl-4 text-[10px] uppercase leading-5 tracking-[0.18em] text-white/65 lg:block">Designed in London<br />Made for the moment</div>
+      </div>
+    </section>
+
+    <section class="virtual-atelier" id="virtual-atelier" aria-labelledby="virtual-atelier-title">
+      <div class="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+        <div class="flex flex-col justify-between gap-7 md:flex-row md:items-end">
+          <div><p class="eyebrow">01 / Virtual atelier</p><h2 id="virtual-atelier-title" class="section-title">Your look, <em>reimagined.</em></h2></div>
+          <p class="max-w-xs text-sm leading-6 text-smoke">Upload a photo, choose a piece, and compose your own private fitting room.</p>
+        </div>
+        <div class="virtual-atelier-grid mt-10">
+          <div class="model-panel">
+            <div class="panel-heading"><div><p class="panel-kicker">The model</p><h3>Begin with a portrait</h3></div><span class="canvas-status" id="canvas-status">Ready</span></div>
+            <div class="model-canvas" id="model-canvas" tabindex="0" aria-label="Virtual fitting canvas">
+              <div class="canvas-empty" id="canvas-empty"><span class="canvas-mark">+</span><p>Upload a full-length photo<br /><small>JPG or PNG · 10MB max</small></p></div>
+              <img class="model-image hidden" id="model-image" alt="Your uploaded model photo" />
+              <div class="canvas-guide" aria-hidden="true">AURELIA / PRIVATE FITTING</div>
+            </div>
+            <div class="panel-actions"><label class="upload-button" for="model-upload">Upload your photo <span aria-hidden="true">↗</span></label><input class="sr-only" id="model-upload" type="file" accept="image/png,image/jpeg" /><button class="clear-button" id="clear-canvas" type="button">Clear canvas</button></div>
+          </div>
+          <div class="wardrobe-panel">
+            <div class="panel-heading"><div><p class="panel-kicker">The wardrobe</p><h3>Find your silhouette</h3></div><span class="item-count" id="item-count">03 pieces</span></div>
+            <div class="wardrobe-tabs" role="tablist" aria-label="Wardrobe categories"><button class="wardrobe-tab active" id="atelier-tab" type="button" role="tab" aria-selected="true" aria-controls="atelier-wardrobe">Atelier collection</button><button class="wardrobe-tab" id="private-tab" type="button" role="tab" aria-selected="false" aria-controls="private-wardrobe">Private wardrobe</button></div>
+            <div class="wardrobe-content" id="atelier-wardrobe" role="tabpanel" aria-labelledby="atelier-tab"><div class="wardrobe-grid" id="atelier-grid"></div><p class="wardrobe-note">Select a piece to place it on your model. Drag to position, then use the corner handle to resize.</p></div>
+            <div class="wardrobe-content hidden" id="private-wardrobe" role="tabpanel" aria-labelledby="private-tab"><label class="private-upload" for="wardrobe-upload"><span class="canvas-mark">+</span><span><strong>Add your own pieces</strong><small>PNG works best for overlays</small></span><span class="upload-arrow">↗</span></label><input class="sr-only" id="wardrobe-upload" type="file" accept="image/png,image/jpeg" multiple /><div class="wardrobe-grid" id="private-grid"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28" id="collection" aria-labelledby="collection-title">
+      <div class="flex flex-col justify-between gap-7 md:flex-row md:items-end">
+        <div><p class="eyebrow">01 / Current collection</p><h2 id="collection-title" class="section-title">The art of <em>arrival.</em></h2></div>
+        <p class="max-w-xs text-sm leading-6 text-smoke">A considered edit of pieces designed to hold the room, without asking for attention.</p>
+      </div>
+      <div class="mt-10 flex items-center gap-6 border-b border-ink/15 text-[10px] font-bold uppercase tracking-[0.18em]" role="tablist" aria-label="Collection filters">
+        <button class="filter-button active" type="button" data-filter="all" role="tab" aria-selected="true">All pieces</button>
+        <button class="filter-button" type="button" data-filter="evening" role="tab" aria-selected="false">Evening</button>
+        <button class="filter-button" type="button" data-filter="tailoring" role="tab" aria-selected="false">Tailoring</button>
+      </div>
+      <div class="gallery-grid mt-8" id="gallery" aria-live="polite"></div>
+      <div class="mt-10 flex justify-center"><button id="show-more" class="text-[10px] font-bold uppercase tracking-[0.2em] underline decoration-champagne decoration-2 underline-offset-8 transition hover:text-champagne">View all pieces</button></div>
+    </section>
+
+    <section class="atelier-section" id="atelier" aria-labelledby="atelier-title">
+      <div class="mx-auto grid max-w-7xl gap-12 px-6 py-20 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-24 lg:px-10 lg:py-28">
+        <div class="atelier-image" role="img" aria-label="Close detail of tailoring and fabric"></div>
+        <div><p class="eyebrow">02 / The atelier</p><h2 id="atelier-title" class="section-title">Made to be <em>remembered.</em></h2><p class="mt-7 max-w-md text-sm leading-7 text-smoke">Aurelia is a wardrobe built slowly. Each piece begins with an exquisite fabric, an architectural line, and the belief that the most memorable thing you can wear is confidence.</p><div class="mt-10 grid max-w-md grid-cols-2 gap-8 border-t border-ink/15 pt-6"><div><strong class="font-display text-4xl font-medium">18</strong><p class="mt-1 text-[10px] uppercase tracking-[0.16em] text-smoke">Hand-finished styles</p></div><div><strong class="font-display text-4xl font-medium">01</strong><p class="mt-1 text-[10px] uppercase tracking-[0.16em] text-smoke">Private London atelier</p></div></div><a href="#booking" class="dark-button mt-10 inline-flex items-center gap-4">Meet with us <span aria-hidden="true">↗</span></a></div>
+      </div>
+    </section>
+
+    <section class="booking-section" id="booking" aria-labelledby="booking-title">
+      <div class="mx-auto grid max-w-7xl gap-14 px-6 py-20 lg:grid-cols-[0.8fr_1.2fr] lg:px-10 lg:py-28">
+        <div><p class="eyebrow">03 / Your appointment</p><h2 id="booking-title" class="section-title">A little time<br /><em>for you.</em></h2><p class="mt-7 max-w-sm text-sm leading-7 text-white/60">Visit our atelier for a one-to-one styling session, a private preview, or simply a glass of something sparkling.</p><p class="mt-10 text-[10px] uppercase tracking-[0.18em] text-champagne">Appointments available Tuesday — Saturday</p></div>
+        <form class="booking-form" id="booking-form">
+          <div class="grid gap-7 sm:grid-cols-2"><label>Full name<input required name="name" type="text" placeholder="Your name" /></label><label>Email address<input required name="email" type="email" placeholder="you@email.com" /></label><label>Preferred date<input required name="date" id="date" type="date" /></label><label>Appointment type<select name="type"><option>Private fitting</option><option>Collection preview</option><option>Wardrobe consultation</option></select></label></div>
+          <label class="mt-7 block">A note for the atelier<textarea name="message" rows="3" placeholder="Tell us a little about what you are looking for"></textarea></label>
+          <div class="mt-8 flex flex-col items-start justify-between gap-5 border-t border-white/15 pt-7 sm:flex-row sm:items-center"><p class="text-xs text-white/45">We will be in touch within one working day.</p><button class="gold-button" type="submit">Request appointment <span aria-hidden="true">↗</span></button></div>
+          <p class="form-message hidden" id="form-message" role="status">Thank you. Your request is with the atelier.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-ink/10 bg-linen"><div class="mx-auto flex max-w-7xl flex-col gap-8 px-6 py-10 lg:flex-row lg:items-end lg:justify-between lg:px-10"><div><a href="#top" class="brand">Aurelia<span>®</span></a><p class="mt-3 text-xs text-smoke">A private wardrobe for lasting impressions.</p></div><div class="flex gap-6 text-[10px] font-bold uppercase tracking-[0.16em] text-smoke"><a class="footer-link" href="#collection">Instagram</a><a class="footer-link" href="#booking">Contact</a><a class="footer-link" href="#top">Back to top ↑</a></div><p class="text-[10px] uppercase tracking-[0.14em] text-smoke/70">© 2025 Aurelia Atelier</p></div></footer>
+  <script src="script.js"></script>
+</body>
+</html>
